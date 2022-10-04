@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/drawer-top') %>
+    <div class="flex flex-col items-start w-full">
+        <main>
+            <form action="/shots/createShot/<%=shoot._id%>" method="POST">
+                <h1><%= shoot.shootName %></h1>
+                <div class="badge badge-accent"><%= shoot.contentType %></div>
+                <h3>Add a Shot</h3>
+                <label for="item">Select an Item</label>
+                    <div class="form-control">
+                        <div class="input-group">
+                            <select class="select select-bordered" id="item" name="item">
+                                <% items.forEach( el => { %>
+                                <option value="<%=el._id%>"><%=el.sku%></option>
+                                <% }) %>
+                            </select>
+                            <button type="submit" class="btn btn-primary">+</button>
+                        </div>
+                    </div>
+            </form>
+            <a href="/" role="button" class="btn">← Back to Home</a>
+        </main>
+        <section>
+            <div class="w-full overflow-x-auto">
+            <table class="table w-full">
+                <thead>
+                  <tr>
+                    <th scope="col">SKU</th>
+                    <th scope="col">Style Name</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% shotsData.forEach( el => { %>
+                        <tr data-id='<%=el._id%>'>
+                            <td><%= el.item_info[0].sku %></td>
+                            <td><%= el.item_info[0].styleName %></td>
+                            <td>                    
+                                <form
+                                action="/shots/deleteShot/<%= el._id %>?_method=DELETE"
+                                method="POST"
+                                >
+                                    <button class="fa-solid fa-trash" type="submit"></button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+
+        </section>
+    </div>
+
+    <%- include('partials/drawer-bottom') %>
+</body>

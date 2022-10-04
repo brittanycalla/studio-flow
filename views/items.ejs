@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+  <%- include('partials/header') %>
+  <%- include('partials/drawer-top') %>
+  <main>
+      <h1>Items</h1>
+      <h2>Add Item</h2>
+      <form action="/items/createItem" method="POST" class="flex-container">
+        <label for="sku">
+          SKU
+          <input type="text" id="sku" name="sku" placeholder="(optional)" class="input input-bordered w-full max-w-xs">
+        </label>
+        <label for="styleNumber">
+          Style Number
+          <input type="text" id="styleNumber" name="styleNumber" placeholder="A unique style identifier" required class="input input-bordered w-full max-w-xs">
+        </label>
+        <label for="color">
+          Color
+          <input type="text" id="color" name="color" placeholder="Canary Yellow" required class="input input-bordered w-full max-w-xs">
+        </label>
+        <label for="styleName">
+          Style Name
+          <input type="text" id="styleName" name="styleName" placeholder="Tank Top" required class="input input-bordered w-full max-w-xs">
+        </label>
+        <label for="category">
+          Category
+          <input type="text" id="category" name="category" placeholder="Apparel" required class="input input-bordered w-full max-w-xs">
+        </label>
+
+        <label for="launchDate">
+          Launch Date
+        <input type="date" id="launchDate" name="launchDate" class="input input-bordered w-full max-w-xs">
+        </label>
+
+        <button type="submit" class="btn">+ Add Item</button>
+      </form>
+      <a href="/" role="button" class="btn">← Back to Home</a>
+  </main>
+  <section>
+    <div class="w-full overflow-x-auto">
+      <table class="table w-full">
+          <thead>
+            <tr>
+              <th scope="col">SKU</th>
+              <th scope="col">Style #</th>
+              <th scope="col">Color</th>
+              <th scope="col">Style Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Launch Date</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+              <% items.forEach( el => { %>
+                  <tr class="hover" data-id='<%=el._id%>'>
+                      <td><%= el.sku %></td>
+                      <td><%= el.styleNumber %></td>
+                      <td><%= el.color %></td>
+                      <td><%= el.styleName %></td>  
+                      <td><%= el.category %></td>
+                      <td><%= el.launchDate === null ? 'TBD' : el.launchDate.toLocaleDateString([], { month: 'short',
+                          day: '2-digit', timeZone: 'UTC' }) %></td>
+                      <td>                    
+                        <form
+                        action="/items/deleteItem/<%= el._id %>?_method=DELETE"
+                        method="POST"
+                        >
+                            <button class="fa-solid fa-trash" type="submit"></button>
+                        </form>
+                      </td>
+                  </tr>
+              <% }) %>
+          </tbody>
+      </table>
+    </div>
+  </section>
+  
+  <%- include('partials/drawer-bottom') %>
+</body>

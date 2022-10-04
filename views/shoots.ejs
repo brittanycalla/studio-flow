@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+</head>
+
+<body>
+    <%- include('partials/header') %>
+    <%- include('partials/drawer-top') %>
+    <main>
+        <h1>Shoots</h1>
+        <h2>Add Shoot</h2>
+        <form action="/shoot/createShoot" method="POST">
+
+          <label for="shootName">
+            Name
+            <input type="text" id="shootName" name="shootName" placeholder="Winter 2022" required class="input input-bordered w-full max-w-xs">
+          </label>
+
+          <label for="startDate">
+            Start Date
+            <input type="date" id="startDate" name="startDate" required class="input input-bordered w-full max-w-xs">
+          </label>
+
+          <label for="endDate">
+            End Date
+            <input type="date" id="endDate" name="endDate" required class="input input-bordered w-full max-w-xs">
+          </label>
+
+          <label for="contentType">
+            Content Type
+            <input type="text" id="contentType" name="contentType" placeholder="On-Figure" required class="input input-bordered w-full max-w-xs">
+          </label>
+
+          <button type="submit" class="btn btn-primary">+ Add Shoot</button>
+        </form>
+        <a href="/" role="button" class="btn">← Back to Home</a>
+    </main>
+    <section>
+
+        <% shoots.forEach( el => { %>
+            <a href="/shoot/<%= el._id%>">
+                <article>
+                    <h4><%= el.contentType %></h4>
+                    <span><%= el.startDate %></span>
+                </article>
+            </a>
+        <% }) %>
+
+    </section>
+
+    <%- include('partials/drawer-bottom') %>
+</body>
