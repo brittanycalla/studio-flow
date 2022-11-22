@@ -1,22 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
     <%- include('partials/head') %>
 </head>
-<body>
-    <%- include('partials/header') %>
-    <% if (locals.messages.errors) { %>
-        <% messages.errors.forEach( el => { %>
-            <div class="alert alert-danger"><%= el.msg %></div>
-        <% }) %>    
-    <% } %>
-    <form action="/signup" method="POST">
-        <input type="text" name="userName" placeholder="User Name">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="confirmPassword" placeholder="Confirm Password">
-        <input type="submit" value="Sign Up">
-    </form>
-    <p>Already have an account? <a href="/login">Login</a></p>
+<body class="px-4">
+    <header class="justify-start h-[7vh]">
+        <a href="/" class="inline-block font-bold tracking-wider" id="logo">studio flow</a>
+    </header>
+    <section class="flex flex-col w-full mb-8 md:px-10 md:flex-row md:flex-wrap">
+        <div class="md:p-6 md:w-6/12" id="about">
+            <h1 class="font-bold leading-none text-3xl mb-4">Easy organization for your photo studio</h1>
+            <h3 class="text-lg mb-6 md:mb-0 md:text-2xl">Spend less time combing through spreadsheets and more being creative.</h3>
+        </div>
+        <div class="md:w-6/12">
+            <img src="/assets/shoot-flow-preview.png" alt="">
+        </div>
+    </section>
+    <section class="md:px-10" id="sign-up">
+       
+        <div>
+
+            <form class="bg-white drop-shadow-2xl rounded-xl px-8 pt-6 pb-8 mb-4" action="/signup" method="POST">
+                <h2 class="text-2xl font-bold mb-6">
+                    Create an Account
+                </h2>
+                <div class="flex flex-wrap">
+                    <div class="w-full mb-4">
+                        <label class="block uppercase tracking-wide text-xs mb-2" for="username">
+                          Username
+                        </label>
+                        <input class="input input-bordered w-full focus:outline-none focus:bg-gray-100" type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="w-full md:w-1/2 mb-4 md:mb-2">
+                        <label class="block uppercase tracking-wide text-xs mb-2" for="password">
+                          Password
+                        </label>
+                        <input class="input input-bordered w-full focus:outline-none focus:bg-gray-100" type="password" name="password" placeholder="Password">
+                        <% if (locals.messages.errors) { %>
+                            <% messages.errors.forEach( el => { %>
+                                <div><p class="text-red-500 text-xs italic"><%= el.msg %></div>
+                            <% }) %>    
+                        <% } %>
+                    </div>
+                    <div class="w-full md:w-1/2 mb-2 md:pl-2">
+                        <label class="block uppercase tracking-wide text-xs mb-2" for="confirmPassword">
+                          Confirm Password
+                        </label>
+                        <input class="input input-bordered w-full focus:outline-none focus:bg-gray-100" type="password" name="confirmPassword" placeholder="Confirm Password">
+                    </div>
+                    <div class="w-full mb-6"><p class="text-bg-500 text-xs italic">
+                        Use 8 or more characters with a mix of letters, numbers and symbols
+                    </div>
+                    <div class="flex flex-wrap items-center justify-between w-full">
+                        <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded  focus:outline-none focus:shadow-outline" type="submit" value="Sign Up">
+                        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/login">
+                          Already have an account? Login
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
 </body>
 </html>

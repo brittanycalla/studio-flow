@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light" lang="en">
 <head>
     <%- include('partials/head') %>
 </head>
@@ -7,45 +7,67 @@
 <body>
   <%- include('partials/header') %>
   <%- include('partials/drawer-top') %>
-  <main>
-      <h1>Items</h1>
-      <h2>Add Item</h2>
-      <form action="/items/createItem" method="POST" class="flex-container">
-        <label for="sku">
-          SKU
-          <input type="text" id="sku" name="sku" placeholder="(optional)" class="input input-bordered w-full max-w-xs">
-        </label>
-        <label for="styleNumber">
-          Style Number
-          <input type="text" id="styleNumber" name="styleNumber" placeholder="A unique style identifier" required class="input input-bordered w-full max-w-xs">
-        </label>
-        <label for="color">
-          Color
-          <input type="text" id="color" name="color" placeholder="Canary Yellow" required class="input input-bordered w-full max-w-xs">
-        </label>
-        <label for="styleName">
-          Style Name
-          <input type="text" id="styleName" name="styleName" placeholder="Tank Top" required class="input input-bordered w-full max-w-xs">
-        </label>
-        <label for="category">
-          Category
-          <input type="text" id="category" name="category" placeholder="Apparel" required class="input input-bordered w-full max-w-xs">
-        </label>
+  <main class="flex flex-col items-start w-full">
+    <div class="text-sm breadcrumbs -mt-5 mb-2 hidden md:inline-block">
+      <ul>
+        <li><a href="/">Dashboard</a></li> 
+        <li>Items</li> 
+      </ul>
+    </div>
+    <h1 class="w-full text-3xl font-bold">Items</h1>
+        <div class="collapse collapse-arrow">
+          <input type="checkbox" /> 
+          <div class="collapse-title text-xl font-medium px-0">
+            <h2>Add an Item</h2>
+          </div>
+          <div class="collapse-content"> 
+            
+            <form action="/items/createItem" method="POST" class="w-full max-w-4xl">
+              <div class="flex flex-wrap mb-6">
 
-        <label for="launchDate">
-          Launch Date
-        <input type="date" id="launchDate" name="launchDate" class="input input-bordered w-full max-w-xs">
-        </label>
+                <div class="w-full mb-6">
+                  <label class="block uppercase tracking-wide text-xs mb-2" for="sku">SKU</label>
+                    <input type="text" id="sku" name="sku" placeholder="(optional)" class="input input-bordered w-full  max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                </div>
 
-        <button type="submit" class="btn">+ Add Item</button>
-      </form>
-      <a href="/" role="button" class="btn">← Back to Home</a>
-  </main>
-  <section>
+                <div class="w-full mb-6">
+                  <label class="block uppercase tracking-wide text-xs mb-2" for="styleNumber">Style Number</label>
+                    <input type="text" id="styleNumber" name="styleNumber" placeholder="A unique style identifier" required class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                </div>
+                
+                <div class="w-full mb-6">
+                  <label class="block uppercase tracking-wide text-xs mb-2" for="color">Color</label>
+                  <input type="text" id="color" name="color" placeholder="Canary Yellow" required class="input  input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                </div>
+
+                <div class="w-full mb-6">
+                  <label class="block uppercase tracking-wide text-xs mb-2" for="styleName">Style Name</label>
+                  <input type="text" id="styleName" name="styleName" placeholder="Tank Top" required class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                </div>
+                  
+
+                <div class="w-full mb-6">
+                  <label class="block uppercase tracking-wide text-xs mb-2" for="category">Category</label>
+                    <input type="text" id="category" name="category" placeholder="Apparel" required class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                </div>
+
+                <div class="w-full mb-6">
+                  <label class="block uppercase tracking-wide text-xs mb-2" for="launchDate">Launch Date</label>
+                  <input type="date" id="launchDate" name="launchDate" class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                </div>
+                <button type="submit" class="btn bg-black">+ Add Item</button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+    <h3 class="w-full mb-2 text-xl">All Items</h3>
     <div class="w-full overflow-x-auto">
       <table class="table w-full">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col">SKU</th>
               <th scope="col">Style #</th>
               <th scope="col">Color</th>
@@ -58,27 +80,35 @@
           <tbody>
               <% items.forEach( el => { %>
                   <tr class="hover" data-id='<%=el._id%>'>
-                      <td><%= el.sku %></td>
-                      <td><%= el.styleNumber %></td>
-                      <td><%= el.color %></td>
-                      <td><%= el.styleName %></td>  
-                      <td><%= el.category %></td>
-                      <td><%= el.launchDate === null ? 'TBD' : el.launchDate.toLocaleDateString([], { month: 'short',
-                          day: '2-digit', timeZone: 'UTC' }) %></td>
-                      <td>                    
-                        <form
-                        action="/items/deleteItem/<%= el._id %>?_method=DELETE"
-                        method="POST"
-                        >
-                            <button class="fa-solid fa-trash" type="submit"></button>
-                        </form>
-                      </td>
+                    <td>
+                      <div class="flex items-center space-x-3">
+                        <div class="avatar">
+                          <div class="mask mask-squircle w-12 h-12">
+                            <img src="/assets/blue-jeans.png" alt="Avatar Tailwind CSS Component" />
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td><%= el.sku %></td>
+                    <td><%= el.styleNumber %></td>
+                    <td><%= el.color %></td>
+                    <td><%= el.styleName %></td>  
+                    <td><%= el.category %></td>
+                    <td><%= el.launchDate === null ? 'TBD' : el.launchDate.toLocaleDateString([], { month: 'short',
+                        day: '2-digit', timeZone: 'UTC' }) %></td>
+                    <td>                    
+                      <form
+                      action="/items/deleteItem/<%= el._id %>?_method=DELETE"
+                      method="POST">
+                          <button class="fa-solid fa-trash" type="submit"></button>
+                      </form>
+                    </td>
                   </tr>
               <% }) %>
           </tbody>
       </table>
     </div>
-  </section>
+  </main>
   
   <%- include('partials/drawer-bottom') %>
 </body>

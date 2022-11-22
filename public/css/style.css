@@ -1,7 +1,6 @@
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+html, h1, h2, h3, h4, h5, h6, p, a, span, html>body, html>body>* {
+    font-family: 'DM Sans', sans-serif;
+    color: #000;
 }
 
 button.fa-solid.fa-trash {
@@ -12,10 +11,6 @@ button.fa-solid.fa-trash {
     width: auto;
 }
 
-td form {
-    margin-bottom: 0;
-}
-
 header {
     display: flex;
     align-items: center;
@@ -23,14 +18,110 @@ header {
     text-decoration: none;
 }
   
-body>header {
-    padding: .75rem 0;
-    /* padding-right: var(--spacing);
-    padding-left: var(--spacing); */
-}
-  
 header a {
     color: var(--contrast);
     font-size: 1.25rem;
     text-decoration: none;
+}
+
+.collapse-arrow .collapse-title:after {
+    left: 10rem;
+}
+
+.collapse-content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+tr td:first-child {
+        z-index: 11;
+        position: sticky;
+        left: 0;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: solid 1px rgb(243 244 246);
+    border-radius: .75rem;
+}
+
+.table th {
+    background-color:  rgb(243 244 246);
+}
+
+@media all and (min-width: 768px) {
+    #about>h1 {
+        font-size: 4.75vw;
+    }
+}
+
+/* overwriting tailwind collapse */
+.collapse.collapse-arrow {
+    visibility: visible
+}
+
+.stats {
+    color: #000;
+}
+
+.stat-shadow {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+
+.badge {
+    border-radius: 1em;
+    color:#000
+}
+
+/* .badge>* {
+    color: #524100;
+} */
+
+/* Menu/Drawer */
+
+.menu>li>a:focus {
+    background-color: #000;
+    color: #fff;
+}
+
+.menu>:where(li:first-child)>:where(:not(ul)):hover, .menu>li:first-child>a:focus {
+    background-color: transparent;
+}
+
+.menu>* {
+    color: #000;
+}
+
+.menu>li>a:focus>svg>* {
+    stroke: #fff;
+}
+
+.drawer-shadow {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.tabletop {
+    background-color: #bebdf7;
+    border: #bebdf7 solid 1px;
+}
+
+.lifestyle {
+    background-color: #adeabc;
+    border: #adeabc solid 1px;
+}
+
+.editorial {
+    background-color: #9bd9fe;
+    border: #9bd9fe solid 1px;
+}
+
+.flatlay {
+    background-color: #ffeb99;
+    border: #ffeb99 solid 1px;
+}
+
+.other {
+    background-color: #fab6e3;
+    border: #fab6e3 solid 1px;
 }

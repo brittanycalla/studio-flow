@@ -57,7 +57,6 @@ module.exports = {
         try{
             await Item.remove({_id:req.params.id})
             console.log('Deleted Item')
-            res.json('Deleted It')
         }catch(err){
             console.log(err)
         }

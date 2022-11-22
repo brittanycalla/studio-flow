@@ -13,6 +13,6 @@ router.post('/createShoot', shootsController.createShoot)
 
 // router.put('/markIncomplete', shootsController.markIncomplete)
 
-router.delete('/deleteShoot', shootsController.deleteShoot)
+router.delete('/deleteShoot/:id', shootsController.deleteShoot)
 
 module.exports = router

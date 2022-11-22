@@ -15,7 +15,6 @@ module.exports = {
     }
   },
   deleteShot: async (req, res)=>{
-    console.log(req.params.id)
     try{
         // retrieving shoot id for reloading page
         const shootId = await Shot.aggregate([

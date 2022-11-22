@@ -20,21 +20,22 @@ module.exports = {
         try {
             const shoot = await Shoot.findById(req.params.id);
             // const shots = await Shot.find({shoot: req.params.id}).lean();
-            const shotsData = await Shot.aggregate([
-                {$match:
-                    {
-                        shoot: new ObjectID(req.params.id)
-                    }
-                },
-                {$lookup: 
-                    {
-                        from: "items",
-                        localField: "item",
-                        foreignField: "_id",
-                        as: "item_info"
-                    }
-                }
-            ])
+            // const shotsData = await Shot.aggregate([
+            //     {$match:
+            //         {
+            //             shoot: new ObjectID(req.params.id)
+            //         }
+            //     },
+            //     {$lookup: 
+            //         {
+            //             from: "items",
+            //             localField: "item",
+            //             foreignField: "_id",
+            //             as: "item_info"
+            //         }
+            //     }
+            // ])
+            const shotsData = await Shot.find({ shoot: req.params.id }).populate('item')
             const items =  await Item.find().sort({ launchDate: 1 } )
             res.render("shootDetails.ejs", { shoot: shoot, title: 'Shoot Details', user: req.user, items: items, shotsData: shotsData });
             console.log(shotsData)
@@ -81,11 +82,12 @@ module.exports = {
     //     }
     // },
     deleteShoot: async (req, res)=>{
-        console.log(req.body.shootIdFromJSFile)
+        console.log(req.params.id)
         try{
-            await Shoot.findOneAndDelete({_id:req.body.shootIdFromJSFile})
+            backURL = req.header('Referer') || '/'
+            await Shoot.deleteOne({_id:req.params.id})
             console.log('Deleted Shoot')
-            res.json('Deleted It')
+            res.redirect(backURL)
         }catch(err){
             console.log(err)
         }
