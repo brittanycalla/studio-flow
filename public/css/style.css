@@ -12,16 +12,11 @@ button.fa-solid.fa-trash {
 }
 
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     text-decoration: none;
 }
   
 header a {
     color: var(--contrast);
-    font-size: 1.25rem;
-    text-decoration: none;
 }
 
 .collapse-arrow .collapse-title:after {
@@ -80,22 +75,23 @@ tr td:first-child {
 
 /* Menu/Drawer */
 
-.menu>li>a:focus {
+/* .menu>li>a:focus {
     background-color: #000;
     color: #fff;
-}
+} */
 
-.menu>:where(li:first-child)>:where(:not(ul)):hover, .menu>li:first-child>a:focus {
+/* .menu>:where(li:first-child)>:where(:not(ul)):hover,  */
+/* .menu>li:first-child>a:focus {
     background-color: transparent;
-}
+} */
 
 .menu>* {
     color: #000;
 }
 
-.menu>li>a:focus>svg>* {
+/* .menu>li>a:focus>svg>* {
     stroke: #fff;
-}
+} */
 
 .drawer-shadow {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
