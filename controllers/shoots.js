@@ -36,7 +36,7 @@ module.exports = {
             //     }
             // ])
             const shotsData = await Shot.find({ shoot: req.params.id }).populate('item')
-            const items =  await Item.find().sort({ launchDate: 1 } )
+            const items =  await Item.find({userId:req.user.id}).sort({ launchDate: 1 } )
             res.render("shootDetails.ejs", { shoot: shoot, title: 'Shoot Details', user: req.user, items: items, shotsData: shotsData });
             console.log(shotsData)
             console.log(req.params.id)
