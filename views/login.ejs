@@ -13,40 +13,44 @@
         </a>
     </header>
     
-    <section class="md:px-10">
+    <section class="flex h-[93vh] md:px-10">
        
-        <div class="max-w-screen-md mx-auto mt-10">
+        <div class="min-w-[30%] max-w-screen-md mt-12 md:m-auto">
 
             <form class="px-8 pt-6 pb-8 mb-4 bg-white drop-shadow-2xl rounded-xl" action="/login" method="POST">
                 <h2 class="mb-6 text-2xl font-bold">
                     Login
                  </h2>
                 <div class="flex flex-col">
-                    <div class="w-full mb-4 md:w-2/3">
+                    <div class="w-full mb-4">
                         <label class="block mb-2 text-xs tracking-wide uppercase" for="username">
                           Username
                         </label>
-                        <input class="w-full input input-bordered focus:outline-none focus:bg-gray-100" type="text" name="username" placeholder="Username">
+                        <input id="username" class="w-full input input-bordered focus:outline-none focus:bg-gray-100" type="text" name="username" placeholder="Username">
                     </div>
-                    <div class="w-full mb-4 md:w-2/3">
+                    <div class="w-full mb-4">
                         <label class="block mb-2 text-xs tracking-wide uppercase" for="password">
                           Password
                         </label>
-                        <input class="w-full input input-bordered focus:outline-none focus:bg-gray-100" type="password" name="password" placeholder="Password">
+                        <input id="password" class="w-full input input-bordered focus:outline-none focus:bg-gray-100" type="password" name="password" placeholder="Password">
                     </div>
                     <% if (locals.messages.errors) { %>
                         <% messages.errors.forEach( el => { %>
                             <div><p class="text-xs italic text-red-500"><%= el.msg %></div>
                         <% }) %>    
                     <% } %>
-                    <div class="flex items-center justify-between w-full">
+                    <div class="flex gap-20 items-center justify-between w-full">
                         <input class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="submit" value="Login">
                         <a class="inline-block text-sm font-bold text-blue-500 align-baseline hover:text-blue-800" href="/signup#sign-up">
                           Don't have an account? Sign Up
                         </a>
                     </div>
+                    <a id="guestAccount" class="animate-ping cursor-pointer mt-5 inline-block text-sm font-bold text-blue-500 align-baseline hover:text-blue-800" role="link">
+                        Use a guest account
+                    </a>
                 </div>
             </form>
         </div>
+        <script src="js/index.js"></script>
 </body>
 </html>
