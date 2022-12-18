@@ -32,7 +32,6 @@ module.exports = {
           } )
           .sort({ startDate: 1 } )
           const numShoots = thisWeeksShoots.length
-          // change to only find shoots that match dates, then remove from populate
           let shots = await Shot.find({ userId:req.user.id })
                                   .populate({
                                     path: 'shoot',
