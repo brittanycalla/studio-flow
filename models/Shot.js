@@ -13,6 +13,10 @@ const ShotSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Item",
   },
+  userId: {
+    type: String,
+    required: true
+  },
   completed: {
     type: Boolean,
     required: true

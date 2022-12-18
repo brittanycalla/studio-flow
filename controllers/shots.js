@@ -7,7 +7,8 @@ module.exports = {
       await Shot.create({
         shoot: req.params.id,
         item: req.body.item,
-        completed: false
+        completed: false,
+        userId: req.user.id
       });
       res.redirect("/shoot/"+req.params.id);
     } catch (err) {

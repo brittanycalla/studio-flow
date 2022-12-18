@@ -121,3 +121,8 @@ tr td:first-child {
     background-color: #fab6e3;
     border: #fab6e3 solid 1px;
 }
+
+.Other {
+    background-color: #fff;
+    border: #000 solid 1px;
+}
