@@ -72,7 +72,7 @@
                     <td><a href="/shoot/<%=el._id%>"><%= el.startDate.toLocaleDateString([], { month: 'short',
                       day: '2-digit', timeZone: 'UTC' }) %><%= el.endDate - el.startDate > 0 ? ` - ${el.endDate.  toLocaleDateString([], { month: 'short',
                       day: '2-digit', year: 'numeric', timeZone: 'UTC' })}` : `, ${el.startDate.toLocaleDateString([], {  year: 'numeric', timeZone: 'UTC' })}` %></a></td>
-                    <td><a href="/shoot/<%=el._id%>"><%= el.contentType %></a></td> 
+                    <td><div class="badge <%= el.contentType %>"><a href="/shoot/<%=el._id%>"><%= el.contentType %></a></div></td> 
                     <td>                   
                       <form
                       action="/shoot/deleteShoot/<%= el._id %>?_method=DELETE"

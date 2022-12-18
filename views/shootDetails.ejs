@@ -19,7 +19,7 @@
         <h2 class="mt-1 mb-2"><%= shoot.startDate.toLocaleDateString([], { month: 'short',
             day: '2-digit', timeZone: 'UTC' }) %><%= shoot.endDate - shoot.startDate > 0 ? ` - ${shoot.endDate.toLocaleDateString([], { month: 'short',
             day: '2-digit', year: 'numeric', timeZone: 'UTC' })}` : `, ${shoot.startDate.toLocaleDateString([], { year: 'numeric', timeZone: 'UTC' })}` %></h2>
-        <div class="badge badge-accent"><%= shoot.contentType %></div>
+        <div class="badge <%= shoot.contentType %>"><%= shoot.contentType %></div>
               
                 <form class="my-8" action="/shots/createShot/<%=shoot._id%>" method="POST">
                     <label class="block uppercase tracking-wide text-xs mb-2" for="item">Add an item to this Shoot</label>

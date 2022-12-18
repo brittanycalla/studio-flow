@@ -22,7 +22,7 @@ module.exports = {
                 category: req.body.category,
                 launchDate: req.body.launchDate,
                 userId: req.user.id,
-                sku: req.body.sku || `${req.body.styleNumber}-${req.body.color.toUpperCase()}`
+                sku: req.body.sku || `${req.body.styleNumber}-${req.body.color.includes(' ') ? req.body.color.toUpperCase().split(' ').join('') : req.body.color.toUpperCase()}`
             })
             console.log('Item has been added!')
             res.redirect('/items')
