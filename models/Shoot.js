@@ -21,11 +21,7 @@ const ShootSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true
-  },
-  shots: [{
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "Shot",
-  }]
+  }
 })
 
 // ShootSchema.pre('deleteOne', function (next) {
