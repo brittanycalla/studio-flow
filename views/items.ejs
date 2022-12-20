@@ -8,7 +8,7 @@
   <%- include('partials/header') %>
   <%- include('partials/drawer-top') %>
   <main class="flex flex-col items-start w-full">
-    <div class="text-sm breadcrumbs -mt-5 mb-2 hidden md:inline-block">
+    <div class="hidden mb-2 -mt-5 text-sm breadcrumbs md:inline-block">
       <ul>
         <li><a href="/">Dashboard</a></li> 
         <li>Items</li> 
@@ -17,7 +17,7 @@
     <h1 class="w-full text-3xl font-bold">Items</h1>
         <div class="collapse collapse-arrow">
           <input type="checkbox" /> 
-          <div class="collapse-title text-xl font-medium px-0">
+          <div class="px-0 text-xl font-medium collapse-title">
             <h2>Add an Item</h2>
           </div>
           <div class="collapse-content"> 
@@ -26,36 +26,36 @@
               <div class="flex flex-wrap mb-6">
 
                 <div class="w-full mb-6">
-                  <label class="block uppercase tracking-wide text-xs mb-2" for="sku">SKU</label>
-                    <input type="text" id="sku" name="sku" placeholder="(optional)" class="input input-bordered w-full  max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                  <label class="block mb-2 text-xs tracking-wide uppercase" for="sku">SKU</label>
+                    <input type="text" id="sku" name="sku" placeholder="(optional)" class="w-full max-w-xs bg-gray-100 input input-bordered focus:outline-none focus:bg-white">
                 </div>
 
                 <div class="w-full mb-6">
-                  <label class="block uppercase tracking-wide text-xs mb-2" for="styleNumber">Style Number</label>
-                    <input type="text" id="styleNumber" name="styleNumber" placeholder="A unique style identifier" required class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                  <label class="block mb-2 text-xs tracking-wide uppercase" for="styleNumber">Style Number</label>
+                    <input type="text" id="styleNumber" name="styleNumber" placeholder="A unique style identifier" required class="w-full max-w-xs bg-gray-100 input input-bordered focus:outline-none focus:bg-white">
                 </div>
                 
                 <div class="w-full mb-6">
-                  <label class="block uppercase tracking-wide text-xs mb-2" for="color">Color</label>
-                  <input type="text" id="color" name="color" placeholder="Canary Yellow" required class="input  input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                  <label class="block mb-2 text-xs tracking-wide uppercase" for="color">Color</label>
+                  <input type="text" id="color" name="color" placeholder="Canary Yellow" required class="w-full max-w-xs bg-gray-100 input input-bordered focus:outline-none focus:bg-white">
                 </div>
 
                 <div class="w-full mb-6">
-                  <label class="block uppercase tracking-wide text-xs mb-2" for="styleName">Style Name</label>
-                  <input type="text" id="styleName" name="styleName" placeholder="Tank Top" required class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                  <label class="block mb-2 text-xs tracking-wide uppercase" for="styleName">Style Name</label>
+                  <input type="text" id="styleName" name="styleName" placeholder="Tank Top" required class="w-full max-w-xs bg-gray-100 input input-bordered focus:outline-none focus:bg-white">
                 </div>
                   
 
                 <div class="w-full mb-6">
-                  <label class="block uppercase tracking-wide text-xs mb-2" for="category">Category</label>
-                    <input type="text" id="category" name="category" placeholder="Apparel" required class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                  <label class="block mb-2 text-xs tracking-wide uppercase" for="category">Category</label>
+                    <input type="text" id="category" name="category" placeholder="Apparel" required class="w-full max-w-xs bg-gray-100 input input-bordered focus:outline-none focus:bg-white">
                 </div>
 
                 <div class="w-full mb-6">
-                  <label class="block uppercase tracking-wide text-xs mb-2" for="launchDate">Launch Date</label>
-                  <input type="date" id="launchDate" name="launchDate" class="input input-bordered w-full max-w-xs bg-gray-100 focus:outline-none focus:bg-white">
+                  <label class="block mb-2 text-xs tracking-wide uppercase" for="launchDate">Launch Date</label>
+                  <input type="date" id="launchDate" name="launchDate" class="w-full max-w-xs bg-gray-100 input input-bordered focus:outline-none focus:bg-white">
                 </div>
-                <button type="submit" class="btn bg-black">+ Add Item</button>
+                <button type="submit" class="bg-black btn">+ Add Item</button>
               </div>
             </form>
 
@@ -67,7 +67,6 @@
       <table class="table w-full">
           <thead>
             <tr>
-              <th scope="col"></th>
               <th scope="col">SKU</th>
               <th scope="col">Style #</th>
               <th scope="col">Color</th>
@@ -80,15 +79,6 @@
           <tbody>
               <% items.forEach( el => { %>
                   <tr class="hover" data-id='<%=el._id%>'>
-                    <td>
-                      <div class="flex items-center space-x-3">
-                        <div class="avatar">
-                          <div class="mask mask-squircle w-12 h-12">
-                            <img src="/assets/blue-jeans.png" alt="Avatar Tailwind CSS Component" />
-                          </div>
-                        </div>
-                      </div>
-                    </td>
                     <td><%= el.sku %></td>
                     <td><%= el.styleNumber %></td>
                     <td><%= el.color %></td>
