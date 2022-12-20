@@ -3,8 +3,8 @@
 <head>
     <%- include('partials/head') %>
 </head>
-<body class="px-4">
-    <header class="h-[7vh] flex items-center">
+<body class="flex flex-col min-h-screen">
+    <header class="flex items-center h-20 px-8 max-w-7xl lg:hidden lg:px-16">
         <a href="/" class="flex gap-2" id="logo">
             <svg class="hover:animate-spin" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" shape-rendering="geometricPrecision" viewBox="0 0 24 24">
                 <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M5.014 3.945A4.768 4.768 0 1112 9.78h.002c-.612 0-1.167.248-1.569.65a4.768 4.768 0 01-5.418-6.484z" fill="#5C59EB"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M3.945 5.014a4.768 4.768 0 016.485 5.418 2.21 2.21 0 00-.65 1.567 4.768 4.768 0 11-5.835-6.985z" fill="#056DFF"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M1.364 12.756A4.768 4.768 0 019.78 12c0 .612.248 1.167.65 1.569a4.768 4.768 0 11-9.065-.814z" fill="#05A1FC"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M7.595 13.825a4.747 4.747 0 012.836-.255c.402.402.957.65 1.57.65a4.768 4.768 0 11-4.406-.396z" fill="#34C759"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M13.594 13.564a4.768 4.768 0 11-1.596.656H12c.614 0 1.17-.248 1.57-.65l.024-.006z" fill="#FFCC01"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M16.405 10.175a4.768 4.768 0 11-2.836 3.396 2.21 2.21 0 00.651-1.502v-.07a4.747 4.747 0 012.185-1.824z" fill="#FCA41D"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M13.825 7.594a4.768 4.768 0 11.447 4.485L14.221 12c0-.613-.249-1.168-.651-1.57a4.745 4.745 0 01.255-2.836z" fill="#FF2C55"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M12.755 1.364a4.768 4.768 0 11.814 9.066A2.212 2.212 0 0012 9.78a4.768 4.768 0 01.755-8.416z" fill="#F249BA"></path>
@@ -13,14 +13,16 @@
         </a>
     </header>
     
-    <section class="flex h-[93vh] md:px-10" id="sign-up">
+    <main class="flex items-center px-8 pb-20 grow lg:px-36 lg:h-screen lg:pb-0" id="sign-up">
        
-        <div class="min-w-[30%] max-w-screen-md mt-12 md:m-auto">
-
-            <form class="px-8 pt-6 pb-8 mb-4 bg-white drop-shadow-2xl rounded-xl" action="/signup" method="POST">
-                <h2 class="mb-6 text-2xl font-bold">
-                    Create an Account
-                </h2>
+        <div class="w-full max-w-sm mx-auto lg:w-96">
+            <h2 class="text-3xl font-bold">
+                Create an account
+            </h2>
+            <a class="inline-block text-sm font-bold align-baseline text-info" href="/login">
+                Already have an account? Login
+            </a>
+            <form class="mt-6" action="/signup" method="POST">
                 <div class="flex flex-wrap">
                     <div class="w-full mb-4">
                         <label class="block mb-2 text-xs tracking-wide uppercase" for="username">
@@ -28,7 +30,7 @@
                         </label>
                         <input class="w-full input input-bordered focus:outline-none focus:bg-gray-100" type="text" name="username" placeholder="Username">
                     </div>
-                    <div class="w-full mb-4 md:w-1/2 md:mb-2">
+                    <div class="w-full mb-4">
                         <label class="block mb-2 text-xs tracking-wide uppercase" for="password">
                           Password
                         </label>
@@ -39,7 +41,7 @@
                             <% }) %>    
                         <% } %>
                     </div>
-                    <div class="w-full mb-2 md:w-1/2 md:pl-2">
+                    <div class="w-full mb-2">
                         <label class="block mb-2 text-xs tracking-wide uppercase" for="confirmPassword">
                           Confirm Password
                         </label>
@@ -48,15 +50,24 @@
                     <div class="w-full mb-6"><p class="text-xs italic text-bg-500">
                         Use 8 or more characters with a mix of letters, numbers and symbols
                     </div>
-                    <div class="flex flex-wrap items-center justify-between w-full">
-                        <input class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline" type="submit" value="Sign Up">
-                        <a class="mt-6 inline-block text-sm font-bold text-blue-500 align-baseline hover:text-blue-800" href="/login">
-                          Already have an account? Login
-                        </a>
-                    </div>
+                    <input class="w-full font-bold tracking-widest text-white bg-[#3ABFF8] btn btn-info hover:bg-[#3ABFF8]" type="submit" value="Sign Up">
                 </div>
             </form>
         </div>
-    </section>
+        <div class="relative flex-1 hidden h-full lg:block lg:grid lg:grid-cols-1">
+            <div class="flex flex-col mx-auto space-y-7">
+                <div class="h-full w-[1px] bg-gradient-to-b from-sky-500 to-sky-100"></div>
+                <div class="flex items-center h-8 -ml-4 shrink-0">
+                    <a href="/" class="flex gap-2" id="logo">
+                        <svg class="hover:animate-spin" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" shape-rendering="geometricPrecision" viewBox="0 0 24 24">
+                        <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M5.014 3.945A4.768 4.768 0 1112 9.78h.002c-.612 0-1.167.248-1.569.65a4.768 4.768 0 01-5.418-6.484z" fill="#5C59EB"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M3.945 5.014a4.768 4.768 0 016.485 5.418 2.21 2.21 0 00-.65 1.567 4.768 4.768 0 11-5.835-6.985z" fill="#056DFF"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M1.364 12.756A4.768 4.768 0 019.78 12c0 .612.248 1.167.65 1.569a4.768 4.768 0 11-9.065-.814z" fill="#05A1FC"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M7.595 13.825a4.747 4.747 0 012.836-.255c.402.402.957.65 1.57.65a4.768 4.768 0 11-4.406-.396z" fill="#34C759"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M13.594 13.564a4.768 4.768 0 11-1.596.656H12c.614 0 1.17-.248 1.57-.65l.024-.006z" fill="#FFCC01"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M16.405 10.175a4.768 4.768 0 11-2.836 3.396 2.21 2.21 0 00.651-1.502v-.07a4.747 4.747 0 012.185-1.824z" fill="#FCA41D"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M13.825 7.594a4.768 4.768 0 11.447 4.485L14.221 12c0-.613-.249-1.168-.651-1.57a4.745 4.745 0 01.255-2.836z" fill="#FF2C55"></path><path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M12.755 1.364a4.768 4.768 0 11.814 9.066A2.212 2.212 0 0012 9.78a4.768 4.768 0 01.755-8.416z" fill="#F249BA"></path>
+                        </svg>
+                        <span class="text-xl font-bold tracking-wider">studio flow</span>
+                    </a>
+                </div>
+                <div class="h-full w-[1px] bg-gradient-to-t from-sky-500 to-sky-100"></div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

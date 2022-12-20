@@ -3,10 +3,10 @@
 <head>
     <%- include('partials/head') %>
 </head>
-<body class="px-4">
-    <header class="h-[7vh]">
-        <nav class="h-full">
-            <ul class="flex items-center h-full gap-4">
+<body>
+    <header class="bg-gray-50">
+        <nav class="h-full px-8 mx-auto max-w-7xl lg:px-16">
+            <ul class="flex items-center h-20 gap-4">
                 <li>
                     <a href="/" class="flex gap-2" id="logo">
                         <svg class="hover:animate-spin" width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false" shape-rendering="geometricPrecision" viewBox="0 0 24 24">
@@ -15,24 +15,49 @@
                         <span class="text-xl font-bold tracking-wider">studio flow</span>
                     </a>
                 </li>
-                <li class="ml-auto">
+                <li class="hidden ml-auto">
                     <a href="/login">Login</a>
                 </li>
-                <li>
-                    <a class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 hover:cursor-default focus:outline-none focus:shadow-outline" href="/signup">Sign Up</a>
+                <li class="hidden">
+                    <a class="font-bold tracking-widest text-white btn btn-info" href="/signup">Sign Up</a>
                 </li>
             </ul>
         </nav>
 
     </header>
-    <section class="flex flex-col w-full mt-6 md:p-16 md:flex-row md:flex-wrap">
-        <div class="md:order-2 md:w-6/12">
-            <img class="" src="/assets/studio-flow-mockup.png" alt="">
+    <section class="bg-gray-50">
+        <div class="flex flex-col max-w-5xl px-8 py-4 mx-auto lg:px-16">
+            <div class="flex flex-col" id="about">
+                <h1 class="mt-5 text-4xl font-bold leading-none tracking-tight text-center md:mt-8 lg:text-5xl xl:text-5xl">Easy organization for your photo studio</h1>
+                <h3 class="mx-auto mt-4 text-lg font-medium text-center text-gray-600 md:text-2xl md:max-w-2xl">Spend less time combing through spreadsheets and more time being creative.</h3>
+                <a class="mx-auto font-bold tracking-widest text-white mt-9 btn btn-info" href="/signup">Get Started</a>
+            </div>
+            <div class="mx-auto mt-16">
+                <img width="600" class="drop-shadow-xl" src="/assets/studio-flow-mockup.png" alt="">
+            </div>
         </div>
-        <div class="md:w-6/12" id="about">
-            <h1 class="mt-6 mb-4 text-3xl font-bold leading-none md:mt-0">Easy organization for your photo studio</h1>
-            <h3 class="mb-6 text-lg md:text-2xl">Spend less time combing through spreadsheets and more being creative.</h3>
-            <a class="inline-block px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 hover:cursor-default focus:outline-none focus:shadow-outline" href="/signup">Sign Up</a>
+    </section>
+    <section class="max-w-5xl px-8 pt-20 pb-8 mx-auto lg:px-16">
+        <div class="max-w-2xl mx-auto text-center">
+            <h3 class="text-3xl font-bold">Why studio flow?</h3>
+            <p class="px-4 mx-auto mt-3 text-lg text-gray-700 md:max-w-2xl ">No more spending hours trying to track down that one elusive error in a sea of formulas. With studio flow, you can say goodbye to those frustrating spreadsheet woes and hello to a much smoother and more enjoyable photo studio management experience.</p>
+        </div>
+        <div class="flex flex-col gap-10 pb-10 mt-12 md:flex-row">
+            <div class="text-center">
+                <div class="flex mx-auto items-center justify-center h-12 w-12 rounded-full bg-[#EBF8FE] text-[#3ABFF8]"><svg class="w-6 h-6" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M16.5 14.5s-1.5 2-4.5 2-4.5-2-4.5-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M15.5 9a.5.5 0 110-1 .5.5 0 010 1zM8.5 9a.5.5 0 110-1 .5.5 0 010 1z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+                <p class="mt-5 text-lg font-medium leading-6 text-gray-900">Easy to use</p>
+                <p class="max-w-xs mx-auto mt-2 text-base text-gray-500">Our intuitive and user-friendly interface makes it easier for you to input and access the data you need.</p>
+            </div>
+            <div class="text-center">
+                <div class="flex mx-auto items-center justify-center h-12 w-12 rounded-full bg-[#EBF8FE] text-[#3ABFF8]"><svg class="w-6 h-6" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M12 6v6h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+                <p class="mt-5 text-lg font-medium leading-6 text-gray-900">Save time</p>
+                <p class="max-w-xs mx-auto mt-2 text-base text-gray-500">Organize a shoot in minutes, improve operational efficiency, and reduce your time to market.</p>
+            </div>
+            <div class="text-center">
+                <div class="flex mx-auto items-center justify-center h-12 w-12 rounded-full bg-[#EBF8FE] text-[#3ABFF8]"><svg class="w-6 h-6" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M12 8v4M12 16.01l.01-.011M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2.5 21.5l4.5-.838A9.955 9.955 0 0012 22z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+                <p class="mt-5 text-lg font-medium leading-6 text-gray-900">Less errors</p>
+                <p class="max-w-xs mx-auto mt-2 text-base text-gray-500">No more repetitive manual entry. Create a shot list using your studio's custom database.</p>
+            </div>
         </div>
     </section>
 </body>
