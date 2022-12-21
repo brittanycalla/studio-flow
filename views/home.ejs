@@ -64,7 +64,7 @@
                   <td>
                     <div class="flex items-center space-x-3">
                       <div class="avatar">
-                        <div style="background-image:url( <%- `https://source.boringavatars.com/marble/120/${el.startDate.toLocaleDateString([], { month: 'short', timeZone: 'UTC' })}%20${el.startDate.toLocaleDateString([], { day: '2-digit', timeZone: 'UTC' })}?colors=bebdf7,9bc5ff,9bd9fe,adeabc,ffeb99,fedba5,ffabbb,fab6e3&square=true"` %> );" class="mask mask-squircle w-12 h-12">
+                        <div style="background-image:url( <%- `https://source.boringavatar.com/marble/120/${el.startDate.toLocaleDateString([], { month: 'short', timeZone: 'UTC' })}%20${el.startDate.toLocaleDateString([], { day: '2-digit', timeZone: 'UTC' })}?colors=bebdf7,9bc5ff,9bd9fe,adeabc,ffeb99,fedba5,ffabbb,fab6e3&square=true"` %> );" class="mask mask-squircle w-12 h-12">
                           <a href="/shoot/<%=el._id%>">
                             <p class="mt-2 text-black font-black tracking-wider text-center text-xs leading-tight uppercase"><%= el.startDate.toLocaleDateString([], { month: 'short', timeZone: 'UTC' }) %></p> 
                             <p class="text-black font-black tracking-wider text-center text-lg leading-none"><%= el.startDate.toLocaleDateString([], { day: '2-digit', timeZone: 'UTC' }) %></p>
