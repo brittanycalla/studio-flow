@@ -1,21 +1,41 @@
-import logo from "../logo.svg";
+import { Link, useOutletContext } from "react-router-dom"
+import logo from "../logo.svg"
+import Header from "../components/Header"
+import Messages from "../components/Messages"
 
 function SignUp() {
+  const { messages, setUser, setMessages } = useOutletContext()
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    const response = await fetch(form.action, {
+      method: form.method,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(new FormData(form)),
+    })
+    const json = await response.json()
+    if (json.messages) setMessages(json.messages)
+    if (json.user) setUser(json.user)
+  }
+
   return (
     <>
+      <Header display={"lg:hidden lg:px-16"} />
       <main
         className="flex items-center px-8 pb-20 grow lg:px-36 lg:h-screen lg:pb-0"
         id="sign-up"
       >
         <div className="w-full max-w-sm mx-auto lg:w-96">
           <h2 className="text-3xl font-bold">Create an account</h2>
-          <a
+          <Link
             className="inline-block text-sm font-bold align-baseline text-info"
-            href="/login"
+            to="/login"
           >
             Already have an account? Login
-          </a>
-          <form className="mt-6" action="/signup" method="POST">
+          </Link>
+          <form className="mt-6" action="/signup" method="POST" onSubmit={handleSubmit}>
             <div className="flex flex-wrap">
               <div className="w-full mb-4">
                 <label
@@ -44,11 +64,6 @@ function SignUp() {
                   name="password"
                   placeholder="Password"
                 />
-                {/* <% if (locals.messages.errors) { %>
-                           <% messages.errors.forEach( el => { %>
-                               <div><p className="text-xs italic text-red-500"><%= el.msg %></div>
-                           <% }) %>    
-                       <% } %> */}
               </div>
               <div className="w-full mb-2">
                 <label
@@ -70,6 +85,7 @@ function SignUp() {
                   symbols
                 </p>
               </div>
+              <Messages messages={messages} />
               <input
                 className="w-full font-bold tracking-widest text-white bg-[#3ABFF8] btn btn-info hover:bg-[#3ABFF8]"
                 type="submit"
@@ -82,7 +98,7 @@ function SignUp() {
           <div className="flex flex-col mx-auto space-y-7">
             <div className="h-full w-[1px] bg-gradient-to-b from-sky-500 to-sky-100"></div>
             <div className="flex items-center h-8 -ml-4 shrink-0">
-              <a href="/" className="flex gap-2" id="logo">
+              <Link to="/" className="flex gap-2" id="logo">
                 <img
                   src={logo}
                   className="hover:animate-spin"
@@ -91,7 +107,7 @@ function SignUp() {
                 <span className="text-xl font-bold tracking-wider">
                   studio flow
                 </span>
-              </a>
+              </Link>
             </div>
             <div className="h-full w-[1px] bg-gradient-to-t from-sky-500 to-sky-100"></div>
           </div>

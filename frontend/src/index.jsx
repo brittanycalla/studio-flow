@@ -6,7 +6,9 @@ import {
 } from "react-router-dom";
 import './index.css';
 import Root from './routes/Root';
+import Dashboard from './routes/Dashboard'
 import ErrorPage from './Error-Page';
+import Index from './routes/Index';
 import SignUp from './routes/Sign-Up';
 import Login from './routes/Login';
 import reportWebVitals from './reportWebVitals';
@@ -16,16 +18,26 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <Index />
+      },
+      {
+        path: "login",
+        element: <Login />
+      },
+      {
+        path: "signup",
+        element: <SignUp />
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />
+      },
+    ],
   },
-  {
-    path: "signup",
-    element: <SignUp />
-  },
-  {
-    path: "login",
-    element: <Login />
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
