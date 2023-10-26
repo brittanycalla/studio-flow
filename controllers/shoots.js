@@ -5,56 +5,72 @@ const ObjectID = require('mongodb').ObjectID;
 
 module.exports = {
     getShoots: async (req,res)=>{
-        console.log(req.user)
         try{
-            const shoots =  await Shoot.find({userId:req.user.id}).sort({ startDate: 1 } )
+            const shoots =  await Shoot
+            .aggregate(
+                [
+                  { $match : { userId:req.user.id } },
+                  { $lookup: {
+                    from: 'shots',
+                    localField: '_id',
+                    foreignField: 'shoot',
+                    as: 'shotList'
+                  } },
+                  { $addFields: {shotCount: {$size: "$shotList"}}}
+                ]
+              )
+            .sort( { startDate: 1 } )
             const numShoots = await Shoot.find({userId:req.user.id})
             const shootsLeft = await Shoot.countDocuments({userId:req.user.id,completed: false})
-            res.render('shoots.ejs', {shoots: shoots, left: shootsLeft, title: 'Shoots', user: req.user})
+            res.json({shoots: shoots, left: shootsLeft})
         }catch(err){
             console.log(err)
         }
     },
     getShootDetails: async (req,res)=>{
-        console.log(req.user)
         try {
-            const shoot = await Shoot.findById(req.params.id);
-            // const shots = await Shot.find({shoot: req.params.id}).lean();
-            // const shotsData = await Shot.aggregate([
-            //     {$match:
-            //         {
-            //             shoot: new ObjectID(req.params.id)
-            //         }
-            //     },
-            //     {$lookup: 
-            //         {
-            //             from: "items",
-            //             localField: "item",
-            //             foreignField: "_id",
-            //             as: "item_info"
-            //         }
-            //     }
-            // ])
-            const shotsData = await Shot.find({ shoot: req.params.id }).populate('item')
+            let shootDetails =  await Shoot 
+            .aggregate(
+              [
+                { $match : { _id: ObjectID(req.params.id) } },
+                { $lookup: {
+                  from: 'shots',
+                  let: { shootId: '$_id' },
+                  pipeline: [
+                    { $match: { $expr: { $eq: [ '$shoot', '$$shootId' ] } } },
+                    { $lookup: {
+                      from: 'items',
+                      let: { itemId: '$item' },
+                      pipeline: [
+                        { $match: { $expr: { $eq: [ '$_id', '$$itemId' ] } } },
+                      ],
+                      as: 'item'
+                    } },
+                    { "$unwind": "$item" }
+                  ],
+                  as: 'shotList'
+                } },
+                { $addFields: {shotCount: {$size: "$shotList"}}}
+              ]
+            )
+
             const items =  await Item.find({userId:req.user.id}).sort({ launchDate: 1 } )
-            res.render("shootDetails.ejs", { shoot: shoot, title: 'Shoot Details', user: req.user, items: items, shotsData: shotsData });
-            console.log(shotsData)
-            console.log(req.params.id)
+            res.json({ shootDetails, items })
           } catch (err) {
             console.log(err);
           }
     },
     createShoot: async (req, res)=>{
         try{
-            await Shoot.create({
+            const shoot = await Shoot.create({
                 shootName: req.body.shootName,
                 startDate: req.body.startDate,
                 endDate: req.body.endDate,
                 contentType: req.body.contentType,
                 userId: req.user.id,
+                shotList: []
             })
-            console.log('Shoot has been added!')
-            res.redirect('/shoot')
+            res.json({ shoot })
         }catch(err){
             console.log(err)
         }
@@ -84,12 +100,19 @@ module.exports = {
     deleteShoot: async (req, res)=>{
         console.log(req.params.id)
         try{
-            backURL = req.header('Referer') || '/'
-            await Shoot.deleteOne({_id:req.params.id})
-            console.log('Deleted Shoot')
-            res.redirect(backURL)
+          const shoot = await Shoot.findOneAndDelete({_id:req.params.id})
+
+          // delete the corresponding shots
+          if (shoot) {
+            await Shot.deleteMany({ shoot: req.params.id });
+            console.log('Deleted Shoot and its corresponding Shots');
+            res.json({ shoot });
+          } else {
+            console.log('Shoot not found');
+            res.status(404).json({ message: 'Shoot not found' });
+          }
         }catch(err){
-            console.log(err)
+          console.log(err)
         }
     }
 }

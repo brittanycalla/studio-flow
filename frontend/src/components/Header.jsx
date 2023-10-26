@@ -1,15 +1,13 @@
-import React from "react";
 import { Link, useOutletContext } from "react-router-dom";
 import logo from "../logo.svg";
 
 const Header = ({ background, display }) => {
-  const { user } = useOutletContext();
-  console.log(user)
+  const { user } = useOutletContext()
   return (
     <header
-      className={`${background} ${display} h-[7vh] flex justify-start items-center w-full px-8 mx-auto max-w-7xl lg:px-16`}
+      className={`${background} ${display} h-[7vh] flex justify-start items-center w-full px-8 mt-4 mx-auto max-w-7xl lg:px-16`}
     >
-      <Link to="/" className="flex gap-2" id="logo">
+      <Link to={user ? '/app' : '/'} className="flex gap-2" id="logo">
         <img src={logo} className="hover:animate-spin" alt="studioflow logo" />
         <span className="text-xl font-bold tracking-wider">studio flow</span>
       </Link>

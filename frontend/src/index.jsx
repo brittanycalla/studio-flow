@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
 import Root from './routes/Root';
 import Dashboard from './routes/Dashboard'
-import ErrorPage from './Error-Page';
-import Index from './routes/Index';
+import Layout from './components/Layout';
+import ErrorPage from './routes/Error-Page';
+import Landing from './routes/Landing';
 import SignUp from './routes/Sign-Up';
 import Login from './routes/Login';
+import Shoots from './routes/Shoots';
+import Items from './routes/Items';
 import reportWebVitals from './reportWebVitals';
-
+import Logout from './routes/Logout';
+import ShootDetails from './routes/ShootDetails';
 
 const router = createBrowserRouter([
   {
@@ -22,22 +23,47 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Index />
+        element: <Landing />
       },
       {
         path: "login",
         element: <Login />
       },
       {
+        path: "logout",
+        element: <Logout />
+      },
+      {
         path: "signup",
         element: <SignUp />
       },
       {
-        path: "dashboard",
-        element: <Dashboard />
+        path: "app",
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Dashboard />
+          },
+          {
+            path: "shoots",
+            element: <Shoots />
+          },
+          {
+            path: "shoots/:id",
+            element: <ShootDetails />
+          },
+          {
+            path: "items",
+            element: <Items />
+          }
+        ],
       },
     ],
   },
+  {
+    
+  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

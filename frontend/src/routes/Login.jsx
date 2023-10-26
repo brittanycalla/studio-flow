@@ -1,16 +1,17 @@
 import { useState } from "react"
-import { Link, useOutletContext } from "react-router-dom"
+import { Link, useOutletContext, useNavigate } from "react-router-dom"
 import logo from "../logo.svg"
-import Header from "../components/Header"
 import Messages from "../components/Messages"
 
 function Login() {
   const { messages, setUser, setMessages } = useOutletContext()
+  const navigate = useNavigate()
+
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    const form = event.currentTarget
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const form = e.currentTarget
     const response = await fetch(form.action, {
       method: form.method,
       headers: {
@@ -20,7 +21,10 @@ function Login() {
     })
     const json = await response.json()
     if (json.messages) setMessages(json.messages)
-    if (json.user) setUser(json.user)
+    if (json.user) {
+      setUser(json.user)
+      navigate("/app")
+    }
   }
 
   const guestLogin = () => {
@@ -29,8 +33,14 @@ function Login() {
   }
 
   return (
-    <>
-      <Header display={"lg:hidden lg:px-16"} />
+    <div className="flex flex-col min-h-screen">
+      <header className="lg:hidden h-[7vh] flex justify-start items-center w-full px-8 pt-4 mx-auto max-w-5xl lg:px-16">
+        <Link to='/' className="flex gap-2" id="logo">
+          <img src={logo} className="hover:animate-spin" alt="studioflow logo" />
+          <span className="text-xl font-bold tracking-wider">studio flow</span>
+        </Link>
+      </header>
+
       <main
         className="flex items-center px-8 pb-20 grow lg:px-36 lg:h-screen lg:pb-0"
         id="sign-up"
@@ -81,13 +91,13 @@ function Login() {
               </div>
               <Messages messages={messages} />
               <input
-                className="w-full font-bold tracking-widest text-white bg-[#3ABFF8] btn btn-info hover:bg-[#3ABFF8]"
+                className="w-full font-bold tracking-widest text-white bg-[#7C3AED] btn btn-info hover:bg-[#7C3AED]"
                 type="submit"
                 value="Login"
               />
               <button
                 id="guestAccount"
-                className="text-left mt-5 text-sm font-bold text-[#3ABFF8] cursor-pointer motion-safe:animate-bounce hover:animate-none"
+                className="text-left mt-5 text-sm font-bold text-[#7C3AED] cursor-pointer motion-safe:animate-bounce hover:animate-none"
                 role="link"
                 onClick={guestLogin}
               >
@@ -98,7 +108,7 @@ function Login() {
         </div>
         <div className="relative flex-1 hidden h-full lg:block lg:grid lg:grid-cols-1">
           <div className="flex flex-col mx-auto space-y-7">
-            <div className="h-full w-[1px] bg-gradient-to-b from-sky-500 to-sky-100"></div>
+            <div className="h-full w-[1px] bg-gradient-to-b from-[#7C3AED] to-[#DDD6FE]"></div>
             <div className="flex items-center h-8 -ml-4 shrink-0">
               <Link to="/" className="flex gap-2" id="logo">
                 <img
@@ -111,11 +121,11 @@ function Login() {
                 </span>
               </Link>
             </div>
-            <div className="h-full w-[1px] bg-gradient-to-t from-sky-500 to-sky-100"></div>
+            <div className="h-full w-[1px] bg-gradient-to-t from-[#7C3AED] to-[#DDD6FE]"></div>
           </div>
         </div>
       </main>
-    </>
+    </div>
   );
 }
 
