@@ -1,14 +1,11 @@
-import { gsap } from "gsap"
-import { useEffect, useState } from "react"
-import { Link, useOutletContext, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import logo from "../logo.svg"
 import rightArrow from "../right-arrow.svg"
 import ShotAnimation from "../components/ShotAnimation"
-import ShootAnimation from "../components/ShootAnimation"
 
 function Landing() {
-  const { user } = useOutletContext()
-  const navigate = useNavigate()
+  // const { user } = useOutletContext()
+  // const navigate = useNavigate()
   // if (user) {
   //   navigate("/app")
   // }
