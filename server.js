@@ -21,8 +21,19 @@ require('dotenv').config({path: './config/.env'})
 // Passport config
 require('./config/passport')(passport)
 
-// Connect to database
+
+// Connect to database and then start the server
 connectDB()
+    .then(() => {
+        // Only start listening once the database connection is established
+        app.listen(process.env.PORT, () => {
+            console.log('Server is running, you better catch it!')
+        })
+    })
+    .catch(err => {
+        console.error('Failed to connect to the database:', err)
+        process.exit(1)  // Exit the process with a failure code
+    })
 
 app.use(cors({
   origin: (origin, callback) => callback(null, true),
@@ -67,6 +78,6 @@ app.use('*', (_, res) => {
   res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
  
-app.listen(process.env.PORT, ()=> {
-    console.log('Server is running, you better catch it!')
-})
+// app.listen(process.env.PORT, ()=> {
+//     console.log('Server is running, you better catch it!')
+// })
