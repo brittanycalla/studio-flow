@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, useOutletContext, Link, useNavigate } from "react-router-dom"
+import { API_BASE } from "../constants"
 import ShotTable from "../components/ShotTable"
 import getShootStatus from "../utils/getShootStatus"
 
@@ -14,7 +15,7 @@ const ShootDetails = () => {
   const [shotCount, setShotCount] = useState(0)
 
   useEffect(() => {
-    fetch(`/api/shoots/${shootId}`)
+    fetch(`${API_BASE}/api/shoots/${shootId}`)
       .then(res => res.json())
       .then(({ shoot, items, shots, shootDetails }) => {
         shootDetails[0].status = getShootStatus(shootDetails[0])
@@ -34,9 +35,10 @@ const ShootDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const response = await fetch(form.action, {
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
       method: form.method,
       body: new FormData(form),
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.messages) setMessages(json.messages)
@@ -51,8 +53,9 @@ const ShootDetails = () => {
   const handleCheck = async (e) => {
     e.preventDefault()
     const form = e.currentTarget.form
-    const response = await fetch(form.action, {
-      method: form.method
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
+      method: form.method,
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.shot) {
@@ -64,8 +67,9 @@ const ShootDetails = () => {
   const handleDeleteShot = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const response = await fetch(form.action, {
-      method: form.method
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
+      method: form.method,
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.shot) {
@@ -78,8 +82,9 @@ const ShootDetails = () => {
   const handleDeleteShoot = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const response = await fetch(form.action, {
-      method: form.method
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
+      method: form.method,
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.shoot) {

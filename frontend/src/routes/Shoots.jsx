@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useOutletContext, Link } from "react-router-dom"
+import { API_BASE } from "../constants"
 import ShootTable from "../components/ShootTable"
 import getShootStatus from "../utils/getShootStatus"
 
@@ -8,7 +9,7 @@ const Shoots = () => {
   const [shoots, setShoots] = useState([])
 
   useEffect(() => {
-    fetch('/api/shoots')
+    fetch('/api/shoots', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         data.shoots.forEach(shoot => shoot.status = getShootStatus(shoot))
@@ -21,9 +22,10 @@ const Shoots = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const response = await fetch(form.action, {
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
       method: form.method,
       body: new FormData(form),
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.messages) setMessages(json.messages)
@@ -35,8 +37,9 @@ const Shoots = () => {
   const handleDelete = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const response = await fetch(form.action, {
-      method: form.method
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
+      method: form.method,
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.shoot) setShoots(shoots.filter(shoot => shoot._id !== json.shoot._id))

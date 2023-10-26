@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useOutletContext, Link } from "react-router-dom"
+import { API_BASE } from "../constants"
 import ItemsTable from "../components/ItemsTable"
 
 const Items = () => {
@@ -7,7 +8,7 @@ const Items = () => {
   const [items, setItems] = useState([])
   
   useEffect(() => {
-    fetch('/api/items')
+    fetch(API_BASE + '/api/items', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         setItems(data.items)
@@ -19,9 +20,10 @@ const Items = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const response = await fetch(form.action, {
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
       method: form.method,
       body: new FormData(form),
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.messages) setMessages(json.messages)
@@ -32,8 +34,9 @@ const Items = () => {
   const handleDelete = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const response = await fetch(form.action, {
-      method: form.method
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
+      method: form.method,
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.item) setItems(items.filter(item => item._id !== json.item._id))

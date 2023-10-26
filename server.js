@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo')(session)
 const methodOverride = require("method-override")
 const flash = require('express-flash')
 const logger = require('morgan')
+const cors = require('cors')
 const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
 const itemRoutes = require('./routes/items')
@@ -22,6 +23,11 @@ require('./config/passport')(passport)
 
 // Connect to database
 connectDB()
+
+app.use(cors({
+  origin: (origin, callback) => callback(null, true),
+  credentials: true
+}))
 
 //status folder
 app.use(express.static('frontend/build'))

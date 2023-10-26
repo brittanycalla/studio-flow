@@ -1,8 +1,7 @@
+const path = require('path')
 const Shoot = require('../models/Shoot')
 const Item = require('../models/Item')
-const Shot = require('../models/Shot');
-const { ObjectId } = require('mongodb');
-const ObjectID = require('mongodb').ObjectID;
+const Shot = require('../models/Shot')
 
 module.exports = {
     getHome: async (req,res)=>{
@@ -53,9 +52,7 @@ module.exports = {
         }
     },
     getIndex: (req, res) => {
-      res.render('index.ejs', {
-        title: 'Studio Flow'
-      })
+      res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
     }
     
 }

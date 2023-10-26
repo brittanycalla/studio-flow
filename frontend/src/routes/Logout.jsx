@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import { useOutletContext, useNavigate } from "react-router-dom"
+import { API_BASE } from "../constants"
 
 const Logout = () => {
   const { setUser } = useOutletContext()
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('/logout')
+    fetch(API_BASE + '/logout', { credentials: 'include' })
       .then(() => {
         setUser(null)
         navigate('/')

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { useOutletContext } from "react-router-dom"
+import { API_BASE } from "../constants"
 import ShootTable from "../components/ShootTable"
 import getShootStatus from "../utils/getShootStatus"
 import camera from "../camera.svg"
@@ -14,7 +15,7 @@ function Dashboard() {
   const [numShots, setNumShots] = useState(0)
   
   useEffect(() => {
-    fetch('/api/home')
+    fetch(API_BASE + '/api/home', { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         data.shoots.forEach(shoot => shoot.status = getShootStatus(shoot))

@@ -1,4 +1,5 @@
 import { Link, useOutletContext, useNavigate } from "react-router-dom"
+import { API_BASE } from "../constants"
 import logo from "../logo.svg"
 import Messages from "../components/Messages"
 
@@ -9,12 +10,13 @@ function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault()
     const form = event.currentTarget
-    const response = await fetch(form.action, {
+    const response = await fetch(API_BASE + form.getAttribute('action'), {
       method: form.method,
       // headers: {
       //   "Content-Type": "application/x-www-form-urlencoded",
       // },
       body: new URLSearchParams(new FormData(form)),
+      credentials: 'include'
     })
     const json = await response.json()
     if (json.messages) setMessages(json.messages)
