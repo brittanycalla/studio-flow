@@ -7,48 +7,47 @@ const ObjectID = require('mongodb').ObjectID;
 module.exports = {
     getHome: async (req,res)=>{
         try{
-          function getSundayOfCurrentWeek() {
-            const today = new Date()
-            const first = today.getDate() - today.getDay()
-            const sunday = new Date(today.setDate(first))
-            sunday.setHours(-4, 0, 0, 0)
-            return sunday
-          } 
-
-          function getSaturdayOfCurrentWeek() {
-              const today = new Date()
-              const first = today.getDate() - today.getDay() + 1
-              const last = first + 5
-              const saturday = new Date(today.setDate(last))
-              saturday.setHours(-4, 0, 0, 0)
-              return saturday
+          function getDayOfCurrentWeek(offset) {
+            const today = new Date();
+            const dayOfWeek = today.getDate() - today.getDay() + offset;
+            const targetDate = new Date(today.setDate(dayOfWeek));
+            targetDate.setHours(-4, 0, 0, 0);
+            return targetDate;
           }
+        
+          function getSundayOfCurrentWeek() {
+            return getDayOfCurrentWeek(0);
+          }
+        
+          function getNextSunday() {
+            return getDayOfCurrentWeek(7);
+          }
+        
 
           const thisWeeksShoots =  await Shoot 
           .aggregate(
             [
-              { $match : { $and: [ { userId:req.user.id }, { startDate: { $gte: getSundayOfCurrentWeek(), $lt: getSaturdayOfCurrentWeek() } } ] } },
+              { $match : { $and: [ { userId:req.user.id }, { startDate: { $gte: getSundayOfCurrentWeek(), $lt: getNextSunday() } } ] } },
               { $lookup: {
                 from: 'shots',
                 localField: '_id',
                 foreignField: 'shoot',
-                as: 'shot_list'
-              } }
+                as: 'shotList'
+              } },
+              { $addFields: {shotCount: {$size: "$shotList"}}}
             ]
           )
           .sort( { startDate: 1 } )
 
-          const numShoots = thisWeeksShoots.length
-
           let shots = await Shot.find({ userId:req.user.id })
                                   .populate({
                                     path: 'shoot',
-                                    match: { startDate: { $gte: getSundayOfCurrentWeek(), $lt: getSaturdayOfCurrentWeek() } }
+                                    match: { startDate: { $gte: getSundayOfCurrentWeek(), $lt: getNextSunday() } }
                                   })
-          shots = shots.filter(e => e.shoot !== null)
+          shots = await shots.filter(e => e.shoot !== null)
           const numShots = await shots.length
           const numItems = await shots.filter((e, i, arr) => arr.findIndex(v => v.item.toString() === e.item.toString()) === i).length
-          res.render('home.ejs', {title: 'Home', user: req.user, shoots: thisWeeksShoots, numShoots: numShoots, numItems: numItems, numShots: numShots})
+          res.json({shoots: thisWeeksShoots, numShots: numShots, shots, numItems})
         }catch(err){
             console.log(err)
         }

@@ -1,3 +1,4 @@
+const path = require('path')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
@@ -13,20 +14,26 @@ const itemRoutes = require('./routes/items')
 const shootRoutes = require('./routes/shoots')
 const shotRoutes = require('./routes/shots')
 
+// Use .env file in config folder
 require('dotenv').config({path: './config/.env'})
 
 // Passport config
 require('./config/passport')(passport)
 
+// Connect to database
 connectDB()
 
-app.set('view engine', 'ejs')
-app.use(express.static('public'))
+//status folder
+app.use(express.static('frontend/build'))
+
+// Body parsing
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+
+// Logging
 app.use(logger('dev'))
 
-//Use forms for put / delete
+// Use forms for put / delete
 app.use(methodOverride("_method"));
 
 // Sessions
@@ -46,10 +53,14 @@ app.use(passport.session())
 app.use(flash())
   
 app.use('/', mainRoutes)
-app.use('/items', itemRoutes)
-app.use('/shoot', shootRoutes)
-app.use('/shots', shotRoutes)
+app.use('/api/items', itemRoutes)
+app.use('/api/shoots', shootRoutes)
+app.use('/api/shots', shotRoutes)
+
+app.use('*', (_, res) => {
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
+});
  
-app.listen(process.env.PORT, ()=>{
+app.listen(process.env.PORT, ()=> {
     console.log('Server is running, you better catch it!')
 })

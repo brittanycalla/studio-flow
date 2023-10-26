@@ -2,20 +2,18 @@ const Item = require('../models/Item')
 
 module.exports = {
     getItems: async (req,res)=>{
-        console.log(req.user)
         try{
             const items =  await Item.find({userId:req.user.id}).sort({ launchDate: 1 } )
             const numItems = await items.length
             const itemsLeft = await Item.countDocuments({userId:req.user.id,completed: false})
-            res.render('items.ejs', {items: items, left: itemsLeft, title: 'Items', user: req.user})
-            console.log(items)
+            res.json({items: items, numItems: numItems, itemsLeft: itemsLeft})
         }catch(err){
             console.log(err)
         }
     },
     createItem: async (req, res)=>{
         try{
-            await Item.create({
+            const item = await Item.create({
                 styleNumber: req.body.styleNumber,
                 color: req.body.color,
                 styleName: req.body.styleName,
@@ -24,8 +22,7 @@ module.exports = {
                 userId: req.user.id,
                 sku: req.body.sku || `${req.body.styleNumber}-${req.body.color.includes(' ') ? req.body.color.toUpperCase().split(' ').join('') : req.body.color.toUpperCase()}`
             })
-            console.log('Item has been added!')
-            res.redirect('/items')
+            res.json({ item })
         }catch(err){
             console.log(err)
         }
@@ -53,10 +50,9 @@ module.exports = {
     //     }
     // },
     deleteItem: async (req, res)=>{
-        console.log(req.params.id)
         try{
-            await Item.remove({_id:req.params.id})
-            console.log('Deleted Item')
+            const item = await Item.findOneAndDelete({_id:req.params.id})
+            res.json({ item })
         }catch(err){
             console.log(err)
         }

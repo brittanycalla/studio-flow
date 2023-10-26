@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html, h1, h2, h3, h4, h5, h6, p, a, span, html>body, html>body>* {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   color: #000;
 }
 
@@ -31,29 +31,33 @@ header a {
   padding-left: 0;
   padding-right: 0;
 }
-
+/* 
 tr td:first-child {
       z-index: 11;
       position: sticky;
       left: 0;
-}
+} */
 
-.table {
+/* .table {
   border-collapse: separate;
   border-spacing: 0;
   border: solid 1px rgb(243 244 246);
   border-radius: .75rem;
-}
+} */
 
 .table th {
   background-color:  rgb(243 244 246);
 }
 
-@media all and (min-width: 768px) {
+tbody > tr:last-child > td {
+  border-bottom: 0;
+}
+
+/* @media all and (min-width: 768px) {
   #about>h1 {
       font-size: 4.75vw;
   }
-}
+} */
 
 /* overwriting tailwind collapse */
 .collapse.collapse-arrow {
@@ -127,6 +131,54 @@ tr td:first-child {
 }
 
 .Other {
-  background-color: #fff;
+  background-color: transparent;
   border: #000 solid 1px;
+}
+
+a.active {
+  background-color: rgba(31, 41, 55, 0.1);
+  color: hsl(var(--bc) / var(--tw-text-opacity));
+}
+
+.schedule,
+.todo,
+.pastdue,
+.completed,
+.inprogress {
+  @apply rounded-full border-solid border-2 px-2 text-xs tracking-wide uppercase whitespace-nowrap 
+}
+
+.schedule,
+.todo,
+.inprogress {
+  @apply border-violet-600
+}
+
+.todo {
+  @apply bg-violet-600 text-white
+}
+
+.schedule,
+.inprogress {
+  @apply text-violet-600
+}
+
+.completed {
+  @apply border-emerald-600 text-emerald-600
+}
+
+.pastdue {
+  @apply border-rose-600 text-rose-600
+}
+
+#card1,
+#card2,
+#card3,
+#card4,
+#card5 {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }

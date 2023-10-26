@@ -1,3 +1,4 @@
+const path = require("path");
 const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
@@ -10,10 +11,7 @@ exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect("/");
   }
-  res.render("login", {
-    title: "Login",
-    user: req.user,
-  });
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 };
 
 exports.postLogin = (req, res, next) => {
@@ -52,7 +50,6 @@ exports.logout = (req, res) => {
     if (err)
       console.log("Error : Failed to destroy the session during logout.", err);
     req.user = null;
-    res.redirect("/");
   });
 };
 
@@ -60,10 +57,7 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect("/");
   }
-  res.render("signup", {
-    title: "Create Account",
-    user: req.user,
-  });
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 };
 
 exports.postSignup = (req, res, next) => {

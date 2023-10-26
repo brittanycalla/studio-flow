@@ -21,13 +21,11 @@ const ShootSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true
+  },
+  shotList: {
+    type: [Shot.schema],
+    required: false
   }
 })
-
-// ShootSchema.pre('deleteOne', function (next) {
-//   const shoot = this;
-//   shoot.model('Shot').deleteOne({ shoot: shoot }, next);
-//   console.log('it worked')
-// });
 
 module.exports = mongoose.model('Shoot', ShootSchema)
