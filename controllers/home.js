@@ -1,8 +1,6 @@
+const path = require('path')
 const Shoot = require('../models/Shoot')
-const Item = require('../models/Item')
 const Shot = require('../models/Shot');
-const { ObjectId } = require('mongodb');
-const ObjectID = require('mongodb').ObjectID;
 
 module.exports = {
     getHome: async (req,res)=>{
