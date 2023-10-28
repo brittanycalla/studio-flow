@@ -53,9 +53,7 @@ module.exports = {
         }
     },
     getIndex: (req, res) => {
-      res.render('index.ejs', {
-        title: 'Studio Flow'
-      })
+      res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
     }
     
 }
