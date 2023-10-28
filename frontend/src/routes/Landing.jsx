@@ -23,8 +23,8 @@ function Landing() {
       <section>
         <div className="flex flex-col max-w-5xl px-8 py-4 mx-auto lg:px-16">
           <div className="flex flex-col items-start" id="about">
-            <h1 className="mt-5 text-3xl font-bold leading-none tracking-tight md:text-5xl md:mt-8">
-              Elevate your e-commerce photography workflow.
+            <h1 className="mt-5 text-3xl font-bold leading-none tracking-tight whitespace-pre-wrap md:text-5xl md:mt-8">
+              Elevate your <span className="whitespace-nowrap">e-commerce</span> photography workflow.
             </h1>
             <p className="mt-4 text-gray-600 md:text-lg lg:text-xl">
               Seamless tracking, effortless shoots, impeccable results.
