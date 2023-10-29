@@ -77,7 +77,3 @@ app.use('/api/shots', shotRoutes)
 app.use('*', (_, res) => {
   res.sendFile(path.join(__dirname, '/frontend/build/index.html'));
 });
- 
-// app.listen(process.env.PORT, ()=> {
-//     console.log('Server is running, you better catch it!')
-// })
