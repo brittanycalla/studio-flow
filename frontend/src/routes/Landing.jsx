@@ -4,18 +4,13 @@ import rightArrow from "../right-arrow.svg"
 import ShotAnimation from "../components/ShotAnimation"
 
 function Landing() {
-  // const { user } = useOutletContext()
-  // const navigate = useNavigate()
-  // if (user) {
-  //   navigate("/app")
-  // }
 
   return (
     <>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
       <header className="h-[7vh] flex justify-start items-center w-full px-8 pt-4 mx-auto max-w-5xl lg:px-16">
         <Link to='/' className="flex gap-2" id="logo">
-          <img src={logo} className="hover:animate-spin" alt="studioflow logo" />
+          <img src={logo} className="hover:animate-spin" alt="studio flow logo" />
           <span className="text-xl font-bold tracking-wider">studio flow</span>
         </Link>
       </header>
