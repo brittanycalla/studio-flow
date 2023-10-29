@@ -9,7 +9,7 @@ exports.getUser = (req, res) => {
 
 exports.getLogin = (req, res) => {
   if (req.user) {
-    return res.redirect("/");
+    return res.redirect("/app");
   }
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 };
@@ -56,7 +56,7 @@ exports.logout = (req, res) => {
 
 exports.getSignup = (req, res) => {
   if (req.user) {
-    return res.redirect("/");
+    return res.redirect("/app");
   }
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 };
